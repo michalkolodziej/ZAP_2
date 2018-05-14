@@ -5,7 +5,7 @@ struct macierz {
 	int h;
 	int f = g + h;
 	int odwiedzony;
-	int kolejka;
+	Mat kolejka;
 };
 
 struct punkt

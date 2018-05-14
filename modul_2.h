@@ -1,7 +1,12 @@
 #ifndef MODUL_2_H
 #define MODUL_2_H
 #include <iostream>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <stdio.h>
 #include <fstream>
+using namespace cv;
 using  namespace std;
 struct macierz;
 struct punkt;

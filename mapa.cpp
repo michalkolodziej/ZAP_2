@@ -70,3 +70,81 @@ void showimg(string nazwa, Mat img)
 	namedWindow(nazwa, CV_WINDOW_AUTOSIZE);
 	imshow(nazwa, img);
 }
+
+void szukaj(macierz **&mapa, int w, int k)
+{
+	int wi = 0;
+	int ko = 0;
+	int suma = mapa[0][0].f;
+	int parzysta = 0;
+	//Mat img = cv::Mat::zeros(w, k, CV_64F);
+
+	while (1)
+	{
+		//punkt obecny;
+		//obecny.x = wi;
+		//obecny.y = ko;
+		//liczG(obecny, mapa, w, k);
+		//mapa[wi][ko].h = w + k - 2 - wi - ko;
+		//mapa[wi][ko].f = mapa[wi][ko].g + mapa[wi][ko].h;
+
+		if (wi == w - 1 && ko == k - 1) break;
+		if (wi == w - 1)
+		{
+			suma = suma + mapa[wi][ko + 1].f;
+			mapa[wi][ko].kolejka = 0;
+
+			ko++;
+		}
+		else if (ko == k - 1)
+		{
+			suma = suma + mapa[wi + 1][ko].f;
+			mapa[wi][ko].kolejka = 0;
+
+			wi++;
+
+		}
+		else
+		{
+			suma = suma + min(mapa[wi][ko + 1].f, mapa[wi + 1][ko].f);
+
+			if (mapa[wi][ko + 1].f < mapa[wi + 1][ko].f)
+			{
+				mapa[wi][ko].kolejka = 0;
+
+				ko++;
+
+			}
+			else if (mapa[wi][ko + 1].f > mapa[wi + 1][ko].f)
+			{
+				mapa[wi][ko].kolejka = 0;
+
+				wi++;
+				// cout<<"w++"<<endl;
+			}
+			else if (mapa[wi][ko + 1].f == mapa[wi + 1][ko].f)
+			{
+				mapa[wi][ko].kolejka = 0;
+				if (parzysta % 2 == 0) wi++;
+				else ko++;
+				parzysta++;
+
+			}
+			/*else if(mapa[wi + 1][ko].f == mapa[wi][ko + 1].f)
+			{
+			mapa[wi][ko].kolejka = 0;
+			if (parzysta1 % 2 == 0) ko++;
+			else wi++;
+			parzysta1++;
+			}
+			*/
+		}
+
+		if (wi == w - 1)
+			if (ko == k - 1)
+			{
+				mapa[wi][ko].kolejka = 0;
+				break;
+			}
+	}
+}

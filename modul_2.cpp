@@ -30,7 +30,8 @@ void **F_g_h(macierz **&tablica, int w, int k) {
 			obecny.x = i;
 			obecny.y = j;
 			liczG(obecny, tablica, w, k);
-			tablica[i][j].h = w + k - 2 - i - j;
+			tablica[i][j].h = w - i + k - j;
+			tablica[i][j].f = tablica[i][j].g + tablica[i][j].h;
 		}
 	}
 	return 0;

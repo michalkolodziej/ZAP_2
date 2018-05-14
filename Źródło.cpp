@@ -5,7 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include "mapa.h"
-#include "graf.h"
+#include "graf1.h"
 #include "modul_2.h"
 
 
@@ -39,114 +39,73 @@ int a;
 int main( int argc, char** argv )
 {
 	string nazwa;
-	cout << "Gib me name: \n";
+	cout << "Podaj nazwe pliku: \n";
 	cin >> nazwa;
 
 	Mat image;	//read image
 	nazwa = "images/" + nazwa;
 	image = imread(nazwa, CV_LOAD_IMAGE_COLOR);
 
-	if (!image.data)                              // Check for invalid input
-	{
-		cout << "Could not open or find the image." << endl;
-		waitKey(0);
-		return 0;
-	}
-	showimg("Deafult", image);
+if (!image.data)                              // Check for invalid input
+{
+	cout << "Could not open or find the image." << endl;
+	cin >> nazwa;
+	waitKey(0);
+	return 0;
+}
+showimg("Deafult", image);
+string echo = "ECHO ";
 
-	Mat gray_image; //change color to gray scale
-	cvtColor(image, gray_image, CV_BGR2GRAY);
-	
-	macierz **mapa = new macierz*[gray_image.rows];
-	for (int i = 0; i < gray_image.rows; i++)
-	{
-		mapa[i] = new macierz[gray_image.cols];
-	}
-	imgtoarray(gray_image, mapa);
 
-	wypelnij(mapa, gray_image.rows, gray_image.cols);
+Mat gray_image; //change color to gray scale
+cvtColor(image, gray_image, CV_BGR2GRAY);
 
-	punkt obecny, poczatek, koniec;
-	ustawpunkt(poczatek, koniec); 
+macierz **mapa = new macierz*[gray_image.rows];
+for (int i = 0; i < gray_image.rows; i++)
+{
+	mapa[i] = new macierz[gray_image.cols];
+}
 
-	int w = gray_image.rows;
-	int k = gray_image.cols;
+imgtoarray(gray_image, mapa);
 
-	obecny.x = 0;
-	obecny.y = 0;
+wypelnij(mapa, gray_image.rows, gray_image.cols);
 
-	liczG(poczatek, mapa, w, k);
-	F_g_h(mapa, w, k);
-	F_f(mapa, w, k);
+punkt obecny, poczatek, koniec;
+ustawpunkt(poczatek, koniec);
 
-	int wi = 0;
-	int ko = 0;
-	int suma = mapa[0][0].f;
+int w = gray_image.rows;
+int k = gray_image.cols;
 
-	while (1)
-	{
-		if (wi == w-1 && ko == k-1) break;
-		if (wi == w - 1)
-		{
-			suma = suma + mapa[wi][ko + 1].f;
-			mapa[wi][ko].kolejka = 0;
-			ko++;
-		}
-		else if (ko == k - 1)
-		{
-			suma = suma + mapa[wi + 1][ko].f;
-			mapa[wi][ko].kolejka = 0;
-			wi++;
+obecny.x = 0;
+obecny.y = 0;
 
-		}
-		else
-		{
-			suma = suma + min(mapa[wi][ko + 1].f, mapa[wi + 1][ko].f);
-			//cout<<" "<<tablica[w][k+1].f<<" "<<tablica[w+1][k].f<<endl;
-			if (mapa[wi][ko + 1].f < mapa[wi + 1][ko].f)
-			{
-				mapa[wi][ko].kolejka = 0;
-				ko++;
-				//cout<<"k++"<<endl;
-			}
-			else if (mapa[wi][ko + 1].f >= mapa[wi + 1][ko].f)
-			{
-				mapa[wi][ko].kolejka = 0;
-				wi++;
-				// cout<<"w++"<<endl;
-			}
-		}
-		if(wi == w - 1)
-			if (ko == k - 1)
-			{
-				mapa[wi][ko].kolejka = 0;
-				break;
-			}
-	}
-	drukuj(mapa, w, k);
-	
-	int *array_img = new int[w*k];
-	cout << "ECHOOOO";
+liczG(poczatek, mapa, w, k);
+F_g_h(mapa, w, k);
+szukaj(mapa, w, k);
+//F_f(mapa, w, k);
+
+	//drukuj(mapa, w, k);
+
+	unsigned char *array_img = new unsigned char[w*k];
+
 	int pomoc = 0;
 	for(int i = 0; i < w; i++)
 	{
 		for (int j = 0; j < k; j++) {
-			array_img[pomoc] = mapa[i][j].kolejka;
+			array_img[pomoc] = (unsigned char)mapa[i][j].kolejka;
 			pomoc++;
 		}
 	}
+	Mat array_img_cv = Mat(w, k, CV_8UC1, array_img);
 
-	//Mat A = (Mat_<int>(w, k) << array_img );
-	//Mat A(w, k, CV_8UC3, array_img);
-	//imwrite("wyjscie.png", A);
-	cout << A;
+	array_img_cv = 255 - array_img_cv;
+	imshow("array", array_img_cv);
 
-	//niby wszystko fajnie tylko te jebane przerabianie macierzy na obrazek mnie wkurwia
 	//no i mog³oby byæ bardziej lokalne szukanie drogi
-
+	imwrite("wyjscie.png", array_img_cv);
 
 	showimg(nazwa, gray_image);
-	waitKey(0);
+	waitKey();
 	//showimg("KONIEC", A);
 	
 	

@@ -13,3 +13,5 @@ using namespace std;
 void **imgtoarray(Mat image, macierz **&tablica);
 
 void showimg(string nazwa, Mat img);
+
+void szukaj(macierz **&mapa, int w, int k);

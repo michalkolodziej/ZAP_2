@@ -1,3 +1,11 @@
+/**
+ * \file modul_2.h
+ * \brief Plik nag?ówkowy modu?u \a modul2.
+ *
+ * Modu? \a mapa zawiera funkcje obs?uguj?ce pomocnicze w algorytmie A*.
+ *
+ * \see modul_2.cpp
+ */
 #ifndef MODUL_2_H
 #define MODUL_2_H
 #include <iostream>
@@ -11,7 +19,25 @@ using  namespace std;
 struct macierz;
 struct punkt;
 struct lista;
-void **F_g_h(macierz **&tablica, int w, int k);//funkcja liczaca wartosci g i h dla calej macierzy
-void **F_f(macierz **&tablica, int w, int k); //funkcja liczaca wartosc f dla ca³ej macierzy
+
+/** \brief Funkcja licz?ca warto?ci g i h
+ *
+ * funkcja liczaca wartosci g i h dla calej macierzy
+ *
+ * \param tablica tablica, dla której warto?ci g i h maj? zosta? policzone
+ * \param w ilo?? wierszy mapy
+ * \param k ilo?? kolumn mapy
+ */
+void F_g_h(macierz **&tablica, int w, int k);//funkcja liczaca wartosci g i h dla calej macierzy
+
+/** \brief Funkcja licz?ca warto?? f
+ *
+ * funkcja liczaca wartos? f dla calej macierzy
+ *
+ * \param tablica tablica, dla której warto?? parametru f ma zosta? policzona
+ * \param w ilo?? wierszy mapy
+ * \param k ilo?? kolumn mapy
+ */
+void F_f(macierz **&tablica, int w, int k); //funkcja liczaca wartosc f dla ca³ej macierzy
 
 #endif // MODUL_2_H

@@ -1,26 +1,5 @@
 #include "graf1.h"
 
-struct macierz {
-	int waga;
-	int g;
-	int h;
-	int f = g + h;
-	int odwiedzony;
-	int kolejka;
-};
-
-struct punkt
-{
-	int x, y;
-};
-
-struct lista
-{
-	punkt pkt;
-	lista *nastepny;
-
-};
-
 void **wypelnij(macierz **&tablica, int w, int k) {
 
 
@@ -133,22 +112,4 @@ int liczF(punkt centrum, macierz **&tablica, int w, int k)
 	return 0;
 }
 
-punkt znajdznajmniejszy(lista *ciag, macierz **&tablica, int w, int k)
-{
-	punkt obecny, minimalny;
-	minimalny = ciag->pkt;
-	int minimum = liczF(minimalny, tablica, w, k);
-	while (ciag)
-	{
-		obecny = ciag->pkt;
-		int nowy = liczF(obecny, tablica, w, k);
-		if (nowy < minimum)
-		{
-			minimum = nowy;
-			minimalny = obecny;
-		}
-		ciag = ciag->nastepny;
-	}
-	return minimalny;
-}
 

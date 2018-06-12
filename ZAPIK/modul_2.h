@@ -24,9 +24,10 @@ struct lista;
  *
  * funkcja liczaca wartosci g i h dla calej macierzy
  *
+ *
  * \param tablica tablica, dla której warto?ci g i h maj? zosta? policzone
- * \param w ilo?? wierszy mapy
- * \param k ilo?? kolumn mapy
+ * \param w ile wierszy mapy
+ * \param k ile kolumn mapy
  */
 void F_g_h(macierz **&tablica, int w, int k);//funkcja liczaca wartosci g i h dla calej macierzy
 
@@ -35,8 +36,8 @@ void F_g_h(macierz **&tablica, int w, int k);//funkcja liczaca wartosci g i h dl
  * funkcja liczaca wartos? f dla calej macierzy
  *
  * \param tablica tablica, dla której warto?? parametru f ma zosta? policzona
- * \param w ilo?? wierszy mapy
- * \param k ilo?? kolumn mapy
+ * \param w ile wierszy mapy
+ * \param k ile kolumn mapy
  */
 void F_f(macierz **&tablica, int w, int k); //funkcja liczaca wartosc f dla ca³ej macierzy
 

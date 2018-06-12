@@ -1,4 +1,4 @@
-#-------------------------------------------------
+    #-------------------------------------------------
 #
 # Project created by QtCreator 2018-05-29T10:21:19
 #
@@ -23,12 +23,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 
+CONFIG += link_pkgconfig
+PKGCONFIG += opencv
+
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    modul_2.cpp \
+    mapa.cpp \
+    graf1.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    modul_2.h \
+    mapa.h \
+    graf1.h
 
 FORMS += \
         mainwindow.ui

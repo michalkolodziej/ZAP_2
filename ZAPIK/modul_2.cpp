@@ -1,28 +1,7 @@
 #include "modul_2.h"
-#include "graf.h"
+#include "graf1.h"
 
-struct macierz {
-	int waga;
-	int g;
-	int h;
-	int f = g + h;
-	int odwiedzony;
-	int kolejka;
-};
-
-struct punkt
-{
-	int x, y;
-};
-
-struct lista
-{
-	punkt pkt;
-	lista *nastepny;
-
-};
-
-void **F_g_h(macierz **&tablica, int w, int k) {
+void F_g_h(macierz **&tablica, int w, int k) {
 	punkt obecny;
 	for (int i = 0; i < w; i++) {
 		for (int j = 0; j < k; j++)
@@ -34,9 +13,9 @@ void **F_g_h(macierz **&tablica, int w, int k) {
 			tablica[i][j].f = tablica[i][j].g + tablica[i][j].h;
 		}
 	}
-	return 0;
+
 }
-void **F_f(macierz**& tablica, int w, int k)
+void F_f(macierz**& tablica, int w, int k)
 {
 	for (int i = 0; i < w; i++) {
 		for (int j = 0; j < k; j++)
@@ -45,7 +24,7 @@ void **F_f(macierz**& tablica, int w, int k)
 		}
 	}
 
-	return 0;
+
 }
 
 
